@@ -6,4 +6,43 @@
   稳定排序   多指标排序 按照指标1排好序之后 按照指标2排序不会影响指标1中的相对位置 （原始数据集中数据的相对位置不会因为按照某一个指标排序而发生改变）
     example: [ person["Tom" , 12] , person["Jerry" , 12] , person["Nike" , 20] ]
             对上述列表List<Person> 按照person对象的年龄进行排序 ，排序后的结果应该是
-             [ person["Nike" , 20] , person["Tom" , 12] , person["Jerry" , 12]  ]
+             [ person["Nike" , 20] , person["Tom" , 12] , person["Jerry" , 12] ]
+            即 Tom 和 Jerry 的相对位置不应该发生变换
+
+2：排序算法的具体说明
+  2.1：选择排序 
+      原理：每次选择数组中最小的元素 找到对应的下标 将其挪到对应的位置 每一轮将第i小的元素放入对应的第i个位置(互换)
+      int temp , sortedIndex = 0 ， movingIndex;
+      while(sortedIndex < n - 1){
+            temp = nums[sortedIndex];
+            movingIndex = sortedIndex;
+            for(int i = sortedIndex + 1 ; i < n ; i++){
+              movingIndex = nums[movingInedx] < nums[i] ? movingIndex : i;
+            }
+      nums[sortedIndex] = nums[movingIndex];
+      nums[movingIndex] = nums[sortedIndex]
+      sortedIndex++;
+      }
+
+      特点：非稳定排序 牺牲空间 达到稳定排序的效果
+      心得：这种原地排序index很重要
+
+  2.2：冒泡排序 
+      原理：交换相邻两个元素的位置 始终将最大的元素置后 每一轮是将第i大的元素放到最后第i个位置
+      int temp , sortedIndex = n - 1;
+      while(sortedIndex > 0){
+            for(int i = 0 ; i < sortedIndex ; i++){
+              if(nums[i] > nums[i + 1]){
+                temp = nums[i + 1];
+                nums[i + 1] = nums[i];
+                nums[i] = temp;
+              }
+      sortedIndex--;
+      }
+
+      特点：稳定排序 只有在后面元素小于前面元素的情况下 才会进行元素交换
+      心得：如何快速的想好双重for循环 从里面的for循环入手 起始点 终止点 一般总会有一个是固定的（固定的通常和数据本身有关） 一个和外层循环相关联 是动态的
+            内层for循环是一轮的操作 比如这里是想将“数组”中最大的数值移动到最后 数组是动态的 长度缩小
+
+    2.3：插入排序
+        原理：
