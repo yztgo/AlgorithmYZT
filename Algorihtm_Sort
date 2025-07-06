@@ -46,13 +46,20 @@
 
     2.3：插入排序
         原理：打扑克原理，数组的左边表示左手，数组的右边表示待拿取的牌；左手是按照从小到大排列好的，右手拿到的是新的牌，从左手最大的牌开始和右手拿到的牌进行比较，然后判断是否进行交换
-        int temp , sortedIndex = 0;
+        int temp , movingIndex , sortedIndex = 0;
         while(sortedIndex < n - 1){
-              for(int i = sortedIndex  ; i > -1 ; i--){
-                if(nums[i + 1] < nums[i]){
-                  temp = nums[i];
-                  nums[i] = nums[i + 1];
-                  nums[i] = temp;
+              temp = nums[sortedIndex + 1];
+              for(int i = sortedIndex ; i > -1 ; i--){
+                if(nums[i] < temp){
+                  movingIndex = i; // 数值变换 数值加减 地址转换 三种操作在计算机中的耗时
+                  nums[i + 1] = nums[i];
+                }
+                else{
+                  nusm[movingIndex] = temp;
+                  break;
                 }
               }
         }
+
+        特点：将新的牌插入已经排好序的牌中，如果新的牌比排好序的最后一张牌还要大，则不需要排序，复杂度降低o(N)
+
