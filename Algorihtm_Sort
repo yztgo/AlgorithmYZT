@@ -44,6 +44,29 @@
       心得：如何快速的想好双重for循环 从里面的for循环入手 起始点 终止点 一般总会有一个是固定的（固定的通常和数据本身有关） 一个和外层循环相关联 是动态的
             内层for循环是一轮的操作 比如这里是想将“数组”中最大的数值移动到最后 数组是动态的 长度缩小
 
+      优化选择排序，提高其稳定性，牺牲时间复杂度的冒泡算法
+      原理：选择排序中是找到右边未排序的数组中最小的数值 ，将其和当前位置进行交换 ， 也就是nums[sortedIndex , ···]中的最小值 和 nums[sortedIndex] 进行交换
+            现在的做法是将sortedIndex , ··· , minValIndex - 1 对应的数组 整体后移一位 保证其稳定性
+      int temp , movingIndex , sortedIndex = 0 ;
+      while(sortedIndex < n - 1){
+            movingIndex = sortedIndex;
+            for(int i = sortedIndex + 1 , i < n ; i++){
+                movingIndex = nums[movingIndex] < nums[i] ? movingIndex : i;
+            }
+            temp = nums[movingIndex];
+            //找到未排序数组中的最小值
+            心得：在数组中找到你想要的数值，通过下标记录比直接记录数值带来的便利性更大
+          
+            for(int i = movingIndex ; i > sortedIndex ; i--){
+                nums[i] = num[i - 1];
+            }
+
+            nums[sortedIndex] = temp;
+            // 交换最小值到对应的位置
+          sortedIndex++;
+      }
+
+
     2.3：插入排序
         原理：打扑克原理，数组的左边表示左手，数组的右边表示待拿取的牌；左手是按照从小到大排列好的，右手拿到的是新的牌，从左手最大的牌开始和右手拿到的牌进行比较，然后判断是否进行交换
         int temp , movingIndex , sortedIndex = 0;
@@ -55,11 +78,11 @@
                   nums[i + 1] = nums[i];
                 }
                 else{
-                  nusm[movingIndex] = temp;
+                  nums[movingIndex] = temp;
                   break;
                 }
               }
         }
 
-        特点：将新的牌插入已经排好序的牌中，如果新的牌比排好序的最后一张牌还要大，则不需要排序，复杂度降低o(N)
+        特点：将新的牌插入已经排好序的牌中，如果新的牌比排好序的最后一张牌还要大，则不需要排序，复杂度降低o(N)，最坏的情况下是冒泡排序的时间复杂度，相当于冒泡排序子问题的逆
 
