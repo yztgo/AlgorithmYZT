@@ -45,4 +45,14 @@
             内层for循环是一轮的操作 比如这里是想将“数组”中最大的数值移动到最后 数组是动态的 长度缩小
 
     2.3：插入排序
-        原理：
+        原理：打扑克原理，数组的左边表示左手，数组的右边表示待拿取的牌；左手是按照从小到大排列好的，右手拿到的是新的牌，从左手最大的牌开始和右手拿到的牌进行比较，然后判断是否进行交换
+        int temp , sortedIndex = 0;
+        while(sortedIndex < n - 1){
+              for(int i = sortedIndex  ; i > -1 ; i--){
+                if(nums[i + 1] < nums[i]){
+                  temp = nums[i];
+                  nums[i] = nums[i + 1];
+                  nums[i] = temp;
+                }
+              }
+        }
