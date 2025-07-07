@@ -115,9 +115,9 @@
     
       2.5：快速排序
         原理：将数组以某一个数值作为分界点 将数组一分为二 左边的数 < 中间的数 < 右边的数
-        int mid , start , left = 0 , rigth = nums.length;
+        int mid , start , left = 0 , rigth = nums.length - 1;
         void fastSort(int mid , int left , int right){
-            if(left == rigth || left == n || right == -1) return; // 防止越界
+            if(left <= rigth ) return; // 防止越界
             mid = partion(left , rigth);
             fastSort(mid + 1, rigth);
             fastSort(left , midel - 1);
