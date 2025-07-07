@@ -28,7 +28,9 @@
       心得：这种原地排序index很重要
 
   2.2：冒泡排序 
-      原理：交换相邻两个元素的位置 始终将最大的元素置后 每一轮是将第i大的元素放到最后第i个位置
+      原理：交换相邻两个元素的位置 始终将最大的元素置后 每一轮是将第i大的元素放到最后第i个位置  ； 
+                若都是有序数组 则可以记录在一次遍历中 是否没有出现交换 如果是 说明每相邻的两个数之间都是严格的小于的关系 整个数组也就是严格的有序数组
+
       int temp , sortedIndex = n - 1;
       while(sortedIndex > 0){
             for(int i = 0 ; i < sortedIndex ; i++){
@@ -85,4 +87,44 @@
         }
 
         特点：将新的牌插入已经排好序的牌中，如果新的牌比排好序的最后一张牌还要大，则不需要排序，复杂度降低o(N)，最坏的情况下是冒泡排序的时间复杂度，相当于冒泡排序子问题的逆
+
+    2.4：希尔排序
+        原理：利用插入排序在处理“有序序列”的有效性，对序列进行预处理，每一次将序列变得更加有序
+        int temp  , gap = num.length / 2 , sortedIndex;
+        while( gap > 0 ){
+              sortedIndex = gap;
+              while(sortedIndex < n){
+                for(int i = sortedIndex ; i >= 0 ; i - gap){
+                        if(nums[sortedIndex] < nums[sortedIndex - gap]){
+                                temp = nums[sortedIndex];
+                                nums[sortedIndex] = nums[sortedIndex - gap];
+                                nums[sortedIndex] = temp;
+                        }
+                        else: bresk; // 提前终止
+                }
+              sortedIndex++;
+              }
+              gap = gap / 2;
+        }
+        特点：利用到插入排序的提前终止的特性，gap有序的数组在gap减小的下一轮排序中，由于上一轮gap排序后的有序性，导致本轮会存在提前终止的特性，并且上一轮的gap较大 排序耗时较小
+             
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
