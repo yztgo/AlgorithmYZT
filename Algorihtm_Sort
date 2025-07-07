@@ -109,6 +109,48 @@
         特点：利用到插入排序的提前终止的特性，gap有序的数组在gap减小的下一轮排序中，由于上一轮gap排序后的有序性，导致本轮会存在提前终止的特性，并且上一轮的gap较大 排序耗时较小
              
 
+人类幼儿园的思维：（非跳跃性思维）循环 遍历
+哪个人要是张嘴就说：排序数组简单啊，只要把一个元素排好序，然后把剩下元素排好序，就能把整个数组排好序了。那只能说这个人可能是三体人潜伏在地球的特务：）
+计算机思维：递归 回溯
+    
+      2.5：快速排序
+        原理：将数组以某一个数值作为分界点 将数组一分为二 左边的数 < 中间的数 < 右边的数
+        int mid , start , left = 0 , rigth = nums.length;
+        void fastSort(int mid , int left , int right){
+            if(left == rigth || left == n || right == -1) return; // 防止越界
+            mid = partion(left , rigth);
+            fastSort(mid + 1, rigth);
+            fastSort(left , midel - 1);
+        }
+            
+
+        int partion(int left , int rigth ){
+            start = nums[left];
+            // 双指针补缺
+            while(left < rigth){
+                if(start < nums[rigth]){
+                  right--;
+                  continue;
+                }
+                nums[left] = nums[rigth];
+                left++;
+                while(left < rigth){
+                    if(nums[left] < start){
+                      left++;
+                      continue;
+                    }
+                    nums[right] = nums[left];
+                    rigth--;
+                    break;
+                }
+           }
+           nums[left] = start;
+          return left;
+        }
+
+                  
+
+    
 
 
 
