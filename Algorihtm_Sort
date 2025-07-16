@@ -71,21 +71,35 @@
 
     2.3：插入排序
         原理：打扑克原理，数组的左边表示左手，数组的右边表示待拿取的牌；左手是按照从小到大排列好的，右手拿到的是新的牌，从左手最大的牌开始和右手拿到的牌进行比较，然后判断是否进行交换
-        int temp , movingIndex , sortedIndex = 0;
+        int temp  , sortedIndex = 0;
         while(sortedIndex < n - 1){
               temp = nums[sortedIndex + 1];
               for(int i = sortedIndex ; i > -1 ; i--){
-                if(nums[i] < temp){
-                  movingIndex = i; // 数值变换 数值加减 地址转换 三种操作在计算机中的耗时
+                if(nums[i] > temp){
+                   // 数值变换 数值加减 地址转换 三种操作在计算机中的耗时
                   nums[i + 1] = nums[i];
                 }
                 else{
-                  nums[movingIndex] = temp;
+                  nums[i+1] = temp;
                   break;
                 }
               }
+              sortedIndex++;
+        } 
+
+        for(int i = 1 ; i < nums.length ; i++){
+            temp = num[i];
+            int j = i - 1;
+            while(j > -1 && nums[j] > temp){
+              nums[j+1] = nums[j];
+              j--;
+            }
+            nums[j+1] = temp;
         }
 
+        心得：关于上述的两种代码 ， 如何考虑使用for 还是 while 
+                                  当迭代的次数已知的时候 ， 使用for更加的清晰 比如说走到数组的尾元素
+                                  当迭代的次数未知 满足某个条件的时候 比如说链表的null 或者达到某种计算条件
         特点：将新的牌插入已经排好序的牌中，如果新的牌比排好序的最后一张牌还要大，则不需要排序，复杂度降低o(N)，最坏的情况下是冒泡排序的时间复杂度，相当于冒泡排序子问题的逆
 
     2.4：希尔排序
@@ -147,6 +161,24 @@
            nums[left] = start;
           return left;
         }
+
+        int partion(int left , int rigth ){
+            start = nums[left];
+            while(left < rigth){
+                while(left < rigth && start < nums[rigth] ){
+                    rigth--;
+                }
+                nums[left] = nums[rigth];
+                left++;
+                while(left < rigth && start > nums[left]){
+                    left++;
+                }
+                nums[rigth] = nums[left];
+                rigth--;
+            }
+        }
+
+      
 
                   
 
