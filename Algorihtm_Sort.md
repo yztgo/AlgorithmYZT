@@ -5,13 +5,15 @@ Collections集合中的sort的底层调用 实质上是数组Arrays中的sort方
 *     Java 的排序实现（以 Arrays.sort() 为例）会根据 数据类型 和 数据规模 选择不同的算法：
 
       基本类型数组（int[], double[] 等）
-      
       元素数 < 47 → 插入排序
       47 ≤ 元素数 ≤ 286 → 双轴快速排序
       元素数 > 286 → 归并排序（或 TimSort 的归并部分）
+  
       对象数组（T[]）
-      
       使用 TimSort（归并 + 插入排序混合）小数据的时候使用插入排序 中等数据的时候使用binarySort(先根据compare确定排序基调 定不符合该基调的start）
+  <img width="565" height="388" alt="image" src="https://github.com/user-attachments/assets/2b31abd9-e739-4e19-a8bf-1e1d87a2e8f0" />
+  <img width="728" height="773" alt="image" src="https://github.com/user-attachments/assets/613b3ced-99c0-4fcc-add1-7d83f2584b71" />
+
       2. 为什么小数据用插入排序？
       (1) 算法复杂度 vs 常数开销
       归并排序：需要额外的临时数组 ，并且递归拆分、合并的过程有较高的常数开销。
