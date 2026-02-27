@@ -1,5 +1,9 @@
 # 关于十大经典排序算法的一个说明
 https://leetcode.cn/problems/sort-an-array/
+
+Collections集合中的sort的底层调用 实质上是数组Arrays中的sort方法
+<img width="596" height="849" alt="image" src="https://github.com/user-attachments/assets/d4c960e6-2e38-4fc5-9a70-3501408d9d10" />
+
 1：排序算法的特点
   时间复杂度 耗时
   空间复杂度 是否是原地排序 是否需要创建新的存放空间
