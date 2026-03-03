@@ -176,54 +176,26 @@ Collections集合中的sort的底层调用 实质上是数组Arrays中的sort方
     
       2.5：快速排序
         原理：将数组以某一个数值作为分界点 将数组一分为二 左边的数 < 中间的数 < 右边的数
-        int mid , start , left = 0 , rigth = nums.length - 1;
-        void fastSort(int mid , int left , int right){
-            if(left <= rigth ) return; // 防止越界
-            mid = partion(left , rigth);
-            fastSort(mid + 1, rigth);
-            fastSort(left , midel - 1);
-        }
-            
-
-        int partion(int left , int rigth ){
-            start = nums[left];
-            // 双指针补缺
+        void fastSort(int start , int end , int[] nums){
+    
+        int num = nums[start];
+            int left = start  , rigth = end - 1;
             while(left < rigth){
-                if(start < nums[rigth]){
-                  right--;
-                  continue;
-                }
-                nums[left] = nums[rigth];
-                left++;
-                while(left < rigth){
-                    if(nums[left] < start){
-                      left++;
-                      continue;
-                    }
-                    nums[right] = nums[left];
-                    rigth--;
-                    break;
-                }
-           }
-           nums[left] = start;
-          return left;
-        }
-
-        int partion(int left , int rigth ){
-            start = nums[left];
-            while(left < rigth){
-                while(left < rigth && start < nums[rigth] ){
-                    rigth--;
-                }
-                nums[left] = nums[rigth];
-                left++;
-                while(left < rigth && start > nums[left]){
-                    left++;
-                }
-                nums[rigth] = nums[left];
-                rigth--;
+                while(left < rigth && num < nums[rigth]) rigth--;
+                if(left == rigth) break;
+                nums[left++] = nums[rigth];
+                
+                while(left < rigth && nums[left] < num) left++;
+                if(left == rigth) break;
+                 nums[rigth--] = nums[left];
+               
             }
-        }
+
+             nums[left] = num;
+        if(left - 1 > start ) fastSort(start , left , nums);
+        if(left + 1 < end) fastSort(left + 1 , end , nums);
+        
+    }
 
   ********************************************** 桶排序的应用 *********************************/
   [数组中第k个最大元素](https://leetcode.cn/problems/kth-largest-element-in-an-array/description/)                
