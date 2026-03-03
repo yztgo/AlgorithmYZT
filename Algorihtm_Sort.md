@@ -135,6 +135,20 @@ Collections集合中的sort的底层调用 实质上是数组Arrays中的sort方
                                   当迭代的次数未知 满足某个条件的时候 比如说链表的null 或者达到某种计算条件
         特点：将新的牌插入已经排好序的牌中，如果新的牌比排好序的最后一张牌还要大，则不需要排序，复杂度降低o(N)，最坏的情况下是冒泡排序的时间复杂度，相当于冒泡排序子问题的逆
 
+    2.3.1 对插入排序的左端依次遍历进行优化 基于二分查找的方式找到对应插入的位置 查找的是第一个小于等于nums[i]的元素位置
+    for(int i = 1 ; i < nums.length ; i++){
+          int num = nums[i];
+          int left = 0 , right = i - 1;
+          while(left <= right){
+                int midle = left + (right - left) / 2;
+                if(nums[midle] <= num) left = midel + 1;
+                else right = midel - 1;
+          }
+          // 找到位置之后将对应的元素进行插入 依次移动左边的元素
+          for(int  j = i ; j > left ; j--) nums[j] = nums[j - 1];
+          nums[left] = num;
+      }
+
     2.4：希尔排序
         原理：利用插入排序在处理“有序序列”的有效性，对序列进行预处理，每一次将序列变得更加有序
         int temp  , gap = num.length / 2 , sortedIndex;
