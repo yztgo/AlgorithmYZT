@@ -197,13 +197,40 @@ Collections集合中的sort的底层调用 实质上是数组Arrays中的sort方
         
     }
 
+
+    2.6 稳定的归并排序 merge两个数组
+     int[] mergeSort(int start , int end , int[] nums){
+        if(end <= start) return new int[]{nums[start]};
+        int midel = start + (end - start) / 2;
+        int[] left = mergeSort(start , midel  , nums);
+        int[] right = mergeSort(midel + 1 , end , nums);
+        int[] ans = new int[left.length + right.length];
+        int i = 0 , j = 0 , count = 0;
+        
+        while(i < left.length && j < right.length){
+            if(left[i] <= right[j]) {
+                ans[count++] = left[i++] ;
+                
+            }else {
+                ans[count++] = right[j++];
+            }
+        }
+        while(i < left.length) ans[count++] = left[i++];
+                while(j < right.length) ans[count++] = right[j++];
+
+
+        return ans;
+        
+    }
+
   ********************************************** 桶排序的应用 *********************************/
   [数组中第k个最大元素](https://leetcode.cn/problems/kth-largest-element-in-an-array/description/)                
 
     
   [两个数组中的中位数]
 
-
+  时间复杂度：递归次数*每次递归的操作
+  
 
 
 
